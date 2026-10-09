@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Front End Web Development — Course Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<script>
+  (function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}})();
+</script>
+<style>
+:root{
+  --bg:#f5f4f0;--paper:#fffefa;--ink:#20231f;--muted:#6f726a;--line:#e4e3dc;
+  --accent:#526b56;--accent-2:#d87950;--accent-soft:#e7ece4;--glow:#7b987c55;
+  --shadow:0 14px 40px #20231f12;--chip:#f1f0eb;
+}
+[data-theme="dark"]{
+  --bg:#0f1311;--paper:#171c19;--ink:#ecf0ea;--muted:#9aa196;--line:#262d28;
+  --accent:#8fb394;--accent-2:#f0996f;--accent-soft:#1f2a22;--glow:#8fb39433;
+  --shadow:0 14px 40px #00000066;--chip:#1e251f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,calc(100% - 48px));margin:auto;position:relative;z-index:1}
+
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:100}
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.55;z-index:0;pointer-events:none;animation:float 18s ease-in-out infinite}
+.blob.b1{width:420px;height:420px;background:var(--glow);top:-120px;right:-80px}
+.blob.b2{width:340px;height:340px;background:#d8795022;bottom:-100px;left:-90px;animation-delay:-6s}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,40px)}}
+
+/* nav */
+header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--line)}
+nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font:800 18px Manrope,sans-serif;letter-spacing:-.6px}
+.brand-mark{width:32px;height:32px;background:var(--accent);color:var(--bg);border-radius:10px;display:grid;place-items:center;font:500 13px "DM Mono",monospace}
+.nav-right{display:flex;align-items:center;gap:26px;font-size:13px;color:var(--muted)}
+.nav-right a:hover{color:var(--ink)}
+.switch{position:relative;width:58px;height:30px;border-radius:99px;border:1px solid var(--line);background:var(--paper);cursor:pointer;padding:0}
+.switch:hover{border-color:var(--accent)}
+.switch .knob{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-size:12px;transition:transform .35s cubic-bezier(.5,1.6,.4,1)}
+[data-theme="dark"] .switch .knob{transform:translateX(28px)}
+.switch .knob:before{content:"☀";color:var(--bg)}
+[data-theme="dark"] .switch .knob:before{content:"☾"}
+
+/* hero */
+.hero{padding:80px 0 56px;display:grid;grid-template-columns:1.1fr .9fr;gap:46px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:1.5px;padding:7px 13px;border:1px solid var(--line);border-radius:99px;background:var(--paper)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--glow)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font:800 clamp(38px,6vw,66px)/1.04 Manrope,sans-serif;letter-spacing:-3.2px;margin:22px 0 18px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.typed{font:500 15px "DM Mono",monospace;color:var(--muted);min-height:24px;margin-bottom:14px}
+.typed b{color:var(--accent);font-weight:500}
+.caret{display:inline-block;width:7px;height:16px;background:var(--accent);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-copy{color:var(--muted);font-size:16px;line-height:1.8;max-width:540px;margin:0}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 21px;border-radius:11px;font-size:14px;font-weight:700;transition:transform .2s,box-shadow .2s;border:0;cursor:pointer}
+.btn:hover{transform:translateY(-3px)}
+.btn .arr{transition:transform .2s}.btn:hover .arr{transform:translate(3px,-3px)}
+.btn-primary{background:var(--accent);color:var(--bg);box-shadow:0 10px 26px var(--glow)}
+.btn-secondary{background:var(--paper);border:1px solid var(--line);color:var(--ink)}
+.btn-secondary:hover{border-color:var(--accent)}
+
+/* course card */
+.course{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow);animation:bob 6s ease-in-out infinite;position:relative;overflow:hidden}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.course:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:var(--glow);right:-70px;top:-90px;filter:blur(30px)}
+.course>*{position:relative}
+.course small{font:10px "DM Mono",monospace;color:var(--muted);letter-spacing:1.3px;text-transform:uppercase}
+.course h3{font:800 22px Manrope,sans-serif;letter-spacing:-.8px;margin:6px 0 20px}
+.rowi{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.ico{width:40px;height:40px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:17px;flex:none}
+.rowi b{display:block;font:700 15px Manrope,sans-serif}
+.rowi span{font:11px "DM Mono",monospace;color:var(--muted)}
+.code{margin-top:6px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:14px;font:12px/1.8 "DM Mono",monospace;color:var(--muted)}
+.code i{font-style:normal;color:var(--accent-2)}.code u{text-decoration:none;color:var(--accent)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:16px;background:var(--paper);overflow:hidden}
+.stat{padding:24px;border-right:1px solid var(--line)}.stat:last-child{border:0}
+.stat b{display:block;font:800 38px Manrope,sans-serif;letter-spacing:-2px;color:var(--accent)}
+.stat span{font:11px "DM Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+
+/* sections */
+section{padding:30px 0}
+.section-head{padding:26px 0 22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.kicker{font:11px "DM Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px}
+.section-head h2{font:800 clamp(26px,4vw,36px) Manrope,sans-serif;letter-spacing:-1.4px;margin:10px 0 0}
+.section-head h2 span{color:var(--accent)}
+.section-head p{color:var(--muted);max-width:520px;line-height:1.7;margin:10px 0 0;font-size:14px}
+.count{font:11px "DM Mono",monospace;color:var(--accent);background:var(--accent-soft);padding:7px 12px;border-radius:99px}
+
+/* project cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),var(--glow),transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--accent)}.card:hover:before{opacity:1}
+.card>*{position:relative}
+.top-row{display:flex;justify-content:space-between;align-items:center}
+.badge{font:11px "DM Mono",monospace;color:var(--accent-2);letter-spacing:1px}
+.status{font:10px "DM Mono",monospace;background:var(--accent-soft);color:var(--accent);padding:5px 9px;border-radius:99px;display:flex;align-items:center;gap:6px}
+.status:before{content:"";width:6px;height:6px;border-radius:50%;background:#4caf6a}
+.card h3{font:700 19px Manrope,sans-serif;letter-spacing:-.5px;margin:16px 0 8px}
+.card p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.tech{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 20px}
+.tech span{font:10px "DM Mono",monospace;color:var(--muted);background:var(--chip);border-radius:5px;padding:5px 8px}
+.card-btns{display:flex;gap:8px;margin-top:auto}
+.card-btns .btn{flex:1;padding:12px 10px;font-size:12px;border-radius:9px}
+.card.empty{border-style:dashed;align-items:center;justify-content:center;text-align:center;min-height:250px;background:transparent}
+.card.empty:hover{transform:none;box-shadow:none;border-color:var(--line)}.card.empty:before{display:none}
+.plus{width:46px;height:46px;border-radius:50%;border:1px dashed var(--muted);display:grid;place-items:center;font-size:22px;color:var(--muted);margin-bottom:12px}
+.card.empty b{font:700 15px Manrope,sans-serif}.card.empty span{font:11px "DM Mono",monospace;color:var(--muted);margin-top:5px}
+
+/* cta */
+.cta{text-align:center;padding:50px 24px;margin:30px 0 56px;border-radius:20px;background:linear-gradient(135deg,var(--accent-soft),var(--paper));border:1px solid var(--line)}
+.cta h2{font:800 clamp(24px,4vw,34px) Manrope,sans-serif;letter-spacing:-1.3px;margin:0 0 10px}
+.cta p{color:var(--muted);font-size:14px;margin:0 auto;max-width:480px;line-height:1.7}
+.cta .actions{justify-content:center}
+footer{border-top:1px solid var(--line);padding:22px 0 30px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:11px}
+.mono{font-family:"DM Mono",monospace}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:52px}.grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media(max-width:600px){.wrap{width:min(100% - 30px,1120px)}.nav-right a{display:none}.grid{grid-template-columns:1fr}h1{letter-spacing:-2px}.btn{flex:1}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div class="blob b1"></div><div class="blob b2"></div>
+
+<header class="top"><div class="wrap"><nav>
+  <a class="brand" href="#top"><span class="brand-mark">&lt;/&gt;</span>frontend.portfolio</a>
+  <div class="nav-right">
+    <a href="#assignments">Assignments</a><a href="#labs">Lab Tasks</a>
+    <button class="switch" id="theme" aria-label="Toggle dark and light mode"><span class="knob"></span></button>
+  </div>
+</nav></div></header>
+
+<div class="wrap" id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Course Portfolio · Fall 2026</span>
+      <h1>Front End <em>Web Development</em></h1>
+      <div class="typed">&gt; <b id="typed"></b><span class="caret"></span></div>
+      <p class="hero-copy">A showcase of all my lab tasks and assignments for the Front End Web Development course. Every project has a live preview and its full source code.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#labs">View Lab Tasks <span class="arr">↓</span></a>
+        <a class="btn btn-secondary" href="#assignments">View Assignments <span class="arr">↓</span></a>
+      </div>
+    </div>
+
+    <div class="course reveal">
+      <small>Course details</small>
+      <h3>Front End Web Development</h3>
+      <div class="rowi"><div class="ico">🎓</div><div><b>Mr. Hafiz Obaid Ullah Khan</b><span>COURSE INSTRUCTOR</span></div></div>
+      <div class="rowi"><div class="ico">👤</div><div><b>Aneeq Abdullah</b><span>ROLL NO. 241803 · BSCS 5A</span></div></div>
+      <div class="rowi"><div class="ico">🏛️</div><div><b>Air University</b><span>BS COMPUTER SCIENCE</span></div></div>
+      <div class="code"><i>&lt;course&gt;</i> <u>HTML</u> · <u>CSS</u> · <u>JavaScript</u> · <u>Bootstrap</u> <i>&lt;/course&gt;</i></div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats reveal" id="stats"></div>
+
+  <!-- ASSIGNMENTS -->
+  <section id="assignments">
+    <div class="section-head reveal">
+      <div><div class="kicker">Section 01</div><h2>Assignments<span>.</span></h2><p>Larger projects that bring together everything covered in the course.</p></div>
+      <div class="count" id="count-assignments"></div>
+    </div>
+    <div class="grid" id="grid-assignments"></div>
+  </section>
+
+  <!-- LABS -->
+  <section id="labs">
+    <div class="section-head reveal">
+      <div><div class="kicker">Section 02</div><h2>Lab Tasks<span>.</span></h2><p>Hands-on exercises completed in the lab, one concept at a time.</p></div>
+      <div class="count" id="count-labs"></div>
+    </div>
+    <div class="grid" id="grid-labs"></div>
+  </section>
+
+  <div class="cta reveal">
+    <h2>Explore everything on GitHub.</h2>
+    <p>Every lab task and assignment lives in the repository, with the full source code.</p>
+    <div class="actions"><a class="btn btn-primary" id="gh" target="_blank" rel="noreferrer">Visit GitHub <span class="arr">↗</span></a></div>
+  </div>
+
+  <footer><div>© 2026 · Aneeq Abdullah · Front End Web Development</div><div class="mono">DESIGNED TO LEARN. BUILT TO SHARE.</div></footer>
+</div>
+
+<script>
+/* ================= EDIT YOUR WORK HERE ================= */
+const GITHUB = "https://github.com/YOUR-USERNAME";
+
+// Each item: [title, description, [technologies], liveUrl, codeUrl]
+const ASSIGNMENTS = [
+  ["ConnecFriend — Social Networking UI",
+   "A complete social networking interface with login, news feed, profiles, friend requests, ratings and private messaging.",
+   ["HTML", "CSS", "JavaScript", "Bootstrap"],
+   "https://YOUR-USERNAME.github.io/YOUR-REPO/assignment-1/",
+   "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/assignment-1"]
+];
+
+const LABS = [
+  ["Lab Task 01", "Short description of what this lab covers.", ["HTML", "CSS"],
+   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-01/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-01"],
+  ["Lab Task 02", "Short description of what this lab covers.", ["HTML", "CSS"],
+   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-02/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-02"],
+  ["Lab Task 03", "Short description of what this lab covers.", ["CSS", "Flexbox"],
+   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-03/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-03"],
+  ["Lab Task 04", "Short description of what this lab covers.", ["JavaScript", "DOM"],
+   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-04/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-04"],
+  ["Lab Task 05", "Short description of what this lab covers.", ["Bootstrap", "Responsive"],
+   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-05/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-05"]
+];
+/* ======================================================== */
+
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2, "0");
+
+function render(list, gridId, prefix, label, nextLabel) {
+  const cards = list.map(([t, d, tech, live, code], i) => `
+    <article class="card reveal">
+      <div class="top-row"><span class="badge">${prefix} ${pad(i + 1)}</span><span class="status">Completed</span></div>
+      <h3>${t}</h3><p>${d}</p>
+      <div class="tech">${tech.map(x => `<span>${x}</span>`).join("")}</div>
+      <div class="card-btns">
+        <a class="btn btn-primary" href="${live}" target="_blank" rel="noreferrer">Live Preview <span class="arr">↗</span></a>
+        <a class="btn btn-secondary" href="${code}" target="_blank" rel="noreferrer">Code Preview <span class="arr">↗</span></a>
+      </div>
+    </article>`).join("");
+  const next = `<div class="card empty reveal"><div class="plus">+</div><b>${nextLabel}</b><span>COMING SOON</span></div>`;
+  $(gridId).innerHTML = cards + next;
+  $("#count-" + label).textContent = pad(list.length) + (list.length === 1 ? " COMPLETED" : " COMPLETED");
+}
+render(ASSIGNMENTS, "#grid-assignments", "ASSIGNMENT", "assignments", "Next Assignment");
+render(LABS, "#grid-labs", "LAB", "labs", "Next Lab Task");
+
+$("#stats").innerHTML = [
+  [ASSIGNMENTS.length + LABS.length, "Total Projects"],
+  [LABS.length, "Lab Tasks"],
+  [ASSIGNMENTS.length, "Assignments"],
+  [100, "% Responsive"]
+].map(([n, l]) => `<div class="stat"><b data-count="${n}">0</b><span>${l}</span></div>`).join("");
+$("#gh").href = GITHUB;
+
+/* theme toggle */
+$("#theme").onclick = () => {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem("theme", next); } catch (e) {}
+};
+
+/* typing effect */
+(function () {
+  const words = ["HTML & semantic markup", "CSS & responsive layouts", "JavaScript & the DOM", "Bootstrap components", "live, working projects"];
+  const el = $("#typed"); let w = 0, c = 0, del = false;
+  (function tick() {
+    const word = words[w];
+    el.textContent = word.slice(0, c);
+    if (!del && c === word.length) { del = true; return setTimeout(tick, 1400); }
+    if (del && c === 0) { del = false; w = (w + 1) % words.length; }
+    c += del ? -1 : 1;
+    setTimeout(tick, del ? 35 : 75);
+  })();
+})();
+
+/* scroll reveal + counters */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add("in");
+  e.target.querySelectorAll("[data-count]").forEach(n => {
+    const end = +n.dataset.count, t0 = performance.now();
+    (function step(t) {
+      const p = Math.min((t - t0) / 1200, 1);
+      n.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  });
+  io.unobserve(e.target);
+}), { threshold: .12 });
+document.querySelectorAll(".reveal").forEach((el, i) => { el.style.transitionDelay = (i % 3) * 90 + "ms"; io.observe(el); });
+
+/* card glow follows cursor */
+document.addEventListener("mousemove", e => {
+  const c = e.target.closest && e.target.closest(".card");
+  if (!c) return;
+  const r = c.getBoundingClientRect();
+  c.style.setProperty("--mx", (e.clientX - r.left) + "px");
+  c.style.setProperty("--my", (e.clientY - r.top) + "px");
+});
+
+/* scroll progress */
+addEventListener("scroll", () => {
+  const h = document.documentElement;
+  $("#progress").style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
+}, { passive: true });
+</script>
+</body>
+</html>
