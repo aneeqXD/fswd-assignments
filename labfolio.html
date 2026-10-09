@@ -208,44 +208,35 @@ const ASSIGNMENTS = [
   ["ConnecFriend — Social Networking UI",
    "A complete social networking interface with login, news feed, profiles, friend requests, ratings and private messaging.",
    ["HTML", "CSS", "JavaScript", "Bootstrap"],
-   "https://YOUR-USERNAME.github.io/YOUR-REPO/assignment-1/",
-   "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/assignment-1"]
+   "Assignment%201/index.html",
+   "Assignment%201/ConnecFriend/README.md"]
 ];
 
 const LABS = [
-  ["Lab Task 01", "Short description of what this lab covers.", ["HTML", "CSS"],
-   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-01/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-01"],
-  ["Lab Task 02", "Short description of what this lab covers.", ["HTML", "CSS"],
-   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-02/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-02"],
-  ["Lab Task 03", "Short description of what this lab covers.", ["CSS", "Flexbox"],
-   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-03/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-03"],
-  ["Lab Task 04", "Short description of what this lab covers.", ["JavaScript", "DOM"],
-   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-04/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-04"],
-  ["Lab Task 05", "Short description of what this lab covers.", ["Bootstrap", "Responsive"],
-   "https://YOUR-USERNAME.github.io/YOUR-REPO/lab-05/", "https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/lab-05"]
+  ["Lab Task 01", "ConnecFriend - a responsive social networking interface with login, a news feed, profiles, friend requests, ratings, and private messaging.", ["HTML", "CSS", "JavaScript", "Bootstrap"],
+   "Assignment%201/index.html", "Assignment%201/ConnecFriend/README.md"]
 ];
 /* ======================================================== */
 
 const $ = s => document.querySelector(s);
 const pad = n => String(n).padStart(2, "0");
 
-function render(list, gridId, prefix, label, nextLabel) {
+function render(list, gridId, prefix, label) {
   const cards = list.map(([t, d, tech, live, code], i) => `
     <article class="card reveal">
       <div class="top-row"><span class="badge">${prefix} ${pad(i + 1)}</span><span class="status">Completed</span></div>
       <h3>${t}</h3><p>${d}</p>
       <div class="tech">${tech.map(x => `<span>${x}</span>`).join("")}</div>
       <div class="card-btns">
-        <a class="btn btn-primary" href="${live}" target="_blank" rel="noreferrer">Live Preview <span class="arr">↗</span></a>
+        <a class="btn btn-primary" href="${live}" target="_blank" rel="noreferrer">${prefix === "ASSIGNMENT" ? "Assignment 1" : "Lab 1"} Live Preview <span class="arr">↗</span></a>
         <a class="btn btn-secondary" href="${code}" target="_blank" rel="noreferrer">Code Preview <span class="arr">↗</span></a>
       </div>
     </article>`).join("");
-  const next = `<div class="card empty reveal"><div class="plus">+</div><b>${nextLabel}</b><span>COMING SOON</span></div>`;
-  $(gridId).innerHTML = cards + next;
+  $(gridId).innerHTML = cards;
   $("#count-" + label).textContent = pad(list.length) + (list.length === 1 ? " COMPLETED" : " COMPLETED");
 }
-render(ASSIGNMENTS, "#grid-assignments", "ASSIGNMENT", "assignments", "Next Assignment");
-render(LABS, "#grid-labs", "LAB", "labs", "Next Lab Task");
+render(ASSIGNMENTS, "#grid-assignments", "ASSIGNMENT", "assignments");
+render(LABS, "#grid-labs", "LAB", "labs");
 
 $("#stats").innerHTML = [
   [ASSIGNMENTS.length + LABS.length, "Total Projects"],
