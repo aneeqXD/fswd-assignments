@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ConnecFriend - Find your people</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/css/custom.css" rel="stylesheet">
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <button class="theme-toggle login-theme-toggle" type="button"><i class="bi bi-moon-stars"></i><span>Dark mode</span></button>
+    <section class="login-intro">
+      <a class="login-brand" href="index.html"><span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="m18 17 4-4a7 7 0 0 1 10 10l-5 5M30 31l-4 4a7 7 0 0 1-10-10l5-5m-3 8 8-8" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="12" cy="16" r="3" fill="currentColor"/><circle cx="36" cy="32" r="3" fill="currentColor"/></svg></span>ConnecFriend</a>
+      <div class="intro-copy"><p class="eyebrow">A little closer, every day</p><h1>Your people.<br><em>Your kind of place.</em></h1><p>Share the small things, pick up where you left off, and stay in touch on your own terms.</p></div>
+      <div class="intro-footer">A thoughtful corner of the internet <span aria-hidden="true">&#10022;</span></div>
+    </section>
+    <section class="login-panel"><div class="login-card">
+      <p class="eyebrow">Welcome back</p><h2>Sign in to your circle</h2><p class="muted">Your friends are just a hello away.</p>
+      <form id="loginForm" novalidate>
+        <label for="username">Username</label><input class="form-control" name="username" id="username" autocomplete="username" required placeholder="e.g. maya">
+        <label for="password" class="mt-3">Password</label>
+        <div class="login-password"><input class="form-control" name="password" id="password" type="password" autocomplete="current-password" required placeholder="Your password"><button class="password-toggle" id="togglePassword" type="button" aria-label="Show password"><i class="bi bi-eye"></i></button></div>
+        <p id="loginError" class="form-error" role="alert"></p>
+        <button class="btn btn-ink w-100 mt-2" type="submit">Enter ConnecFriend <i class="bi bi-arrow-right ms-1"></i></button>
+      </form>
+      <details class="demo-box demo-details"><summary><i class="bi bi-lightbulb"></i> Try a demo account</summary><p>Pick a member to fill their login details instantly. All demo accounts use <code>friend123</code>.</p><div class="demo-accounts" id="demoAccounts" aria-label="Demo accounts"></div><p class="demo-selection" id="demoSelection" aria-live="polite"></p></details>
+    </div></section>
+  </main>
+  <script src="assets/js/data.js"></script><script src="assets/js/storage.js"></script><script src="assets/js/utils.js"></script><script src="assets/js/ui.js"></script><script src="assets/js/auth.js"></script>
+  <script>document.getElementById('togglePassword').addEventListener('click',event=>{const input=document.getElementById('password'),icon=event.currentTarget.querySelector('i'),show=input.type==='password';input.type=show?'text':'password';event.currentTarget.setAttribute('aria-label',show?'Hide password':'Show password');icon.className=`bi bi-eye${show?'-slash':''}`});</script>
+</body>
+</html>
